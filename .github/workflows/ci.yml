@@ -4,8 +4,9 @@ jobs:
         # needs: formatter
         runs-on: ubuntu-latest
         steps:
-            - run: pip install black && black .
             - uses: actions/checkout@v4
+            - run: pip install black && black .
+
             - run: pip install flake8 && flake8 .
     test:
         needs: lint
