@@ -1,0 +1,21 @@
+
+
+on: [push, pull_request]
+jobs:
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: pip install flake8 && flake8 .
+    test:
+        needs: lint
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: pip install -r requirements.txt
+            - run: pytest
+    formatter:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: pip install black && black ./src
