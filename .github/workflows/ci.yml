@@ -1,7 +1,6 @@
 on: [push]
 jobs:
     lint:
-        # needs: formatter
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
@@ -25,4 +24,3 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - run: pip install bandit && bandit -r ./src
-# testing
