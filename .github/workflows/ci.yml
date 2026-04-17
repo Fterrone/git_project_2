@@ -3,11 +3,11 @@
 on: [push]
 jobs:
     lint:
-        # needs: formatter
+        needs: formatter
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - run: pip install flake8 && flake8 ./src
+            - run: pip install flake8 && flake8 .
     test:
         needs: lint
         runs-on: ubuntu-latest
@@ -15,8 +15,8 @@ jobs:
             - uses: actions/checkout@v4
             - run: pip install -r requirements.txt
             - run: pytest
-    # formatter:
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - uses: actions/checkout@v4
-    #         - run: pip install black && black ./src
+    formatter:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: pip install black && black ./src && black ./tests
