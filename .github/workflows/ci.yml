@@ -9,7 +9,7 @@ jobs:
 
             - run: pip install flake8 && flake8 ./src
     test:
-        needs: lint
+        needs: sec_scan
 
         strategy:
             matrix:
@@ -20,7 +20,8 @@ jobs:
             - run: pip install -r requirements.txt
             - run: pytest
     sec_scan:
+        needs: lint
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - run: pip install bandit && bandit -r .
+            - run: pip install bandit && bandit -r ./src
